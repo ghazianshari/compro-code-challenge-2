@@ -1,15 +1,19 @@
-import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import BlogList from "./_components/BlogList";
 import Jumbotron from "./_components/Jumbotron";
-import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function BlogsList() {
   return (
-    <main className="container min-h-screen mx-auto px-4 bg-black text-white">
+    <div className="min-h-screen flex flex-col bg-black text-white">
       <Navbar />
-      <Jumbotron />
-      <BlogList />
+
+      <main className="flex-grow px-6 md:px-16 lg:px-24 pt-24 pb-12">
+        <Jumbotron />
+        <BlogList />
+      </main>
+
       <Footer />
-    </main>
+    </div>
   );
 }
