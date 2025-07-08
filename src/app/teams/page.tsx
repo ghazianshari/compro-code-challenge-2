@@ -94,11 +94,9 @@ const TeamsPage = () => {
                 viewport={{ once: true }}
               >
                 {user && (
-                  <Image
+                  <img
                     src={user.picture.large}
                     alt={member.name}
-                    width={120}
-                    height={120}
                     className="mx-auto rounded-full border border-red-500 mb-4"
                   />
                 )}
