@@ -1,82 +1,105 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { motion } from "framer-motion";
+import { Loader } from "lucide-react";
 import Link from "next/link";
+import useLogin from "./_hooks/useLogin";
 
 const LoginPage = () => {
-  const [form, setForm] = useState({ identity: "", password: "" });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("AUTH RITUAL INITIATED ⚔️");
-    // TODO: Connect to your auth API here
-  };
+  const { mutateAsync: login, isPending } = useLogin();
 
   return (
-    <main className="bg-black text-white min-h-screen flex items-center justify-center px-6 py-24">
-      <motion.div
-        className="w-full max-w-md bg-zinc-900 border border-red-600 rounded-2xl p-8 shadow-2xl"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h1 className="text-3xl font-bold text-red-500 text-center mb-6">
-          Welcome Back, Mortal
-        </h1>
-        <p className="text-center text-sm text-gray-400 mb-8">
-          Access the marketplace of shadows.
-        </p>
+    <>
+      <main className="bg-black text-white min-h-screen flex items-center justify-center px-6 py-24">
+        <motion.div
+          className="w-full max-w-md bg-zinc-900 border border-red-600 rounded-2xl p-8 shadow-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 className="text-3xl font-bold text-red-500 text-center mb-6">
+            Welcome Back, Mortal
+          </h1>
+          <p className="text-center text-sm text-gray-400 mb-8">
+            Access the marketplace of shadows.
+          </p>
 
-        <form onSubmit={handleLogin} className="space-y-6">
-          <div>
-            <label className="block text-sm text-gray-300 mb-1">
-              Username or Email
-            </label>
-            <input
-              type="text"
-              name="identity"
-              required
-              value={form.identity}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-md bg-zinc-800 border border-red-500 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
-              placeholder="you@helmarket.dev"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm text-gray-300 mb-1">Password</label>
-            <input
-              type="password"
-              name="password"
-              required
-              value={form.password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-md bg-zinc-800 border border-red-500 text-white focus:outline-none focus:ring-2 focus:ring-red-600"
-              placeholder="••••••••••"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-2 bg-red-600 hover:bg-red-700 transition rounded-md text-white font-semibold"
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            onSubmit={async (values) => {
+              await login({ login: values.email, password: values.password });
+            }}
           >
-            Enter the Market
-          </button>
-        </form>
+            <Form className="space-y-4">
+              <CardHeader>
+                <CardTitle>Login to your account</CardTitle>
+                <CardDescription>
+                  Enter your email below to login to your account
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-6">
+                  {/* EMAIL */}
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Field
+                      name="email"
+                      as={Input}
+                      type="email"
+                      placeholder="Your email"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="p"
+                      className="text-sm text-red-500"
+                    />
+                  </div>
 
-        <div className="mt-6 text-center text-sm text-gray-400">
-          Forgot your password?{" "}
-          <Link href="/recover" className="text-red-500 hover:underline">
-            Summon recovery
-          </Link>
-        </div>
-      </motion.div>
-    </main>
+                  {/* PASSWORD */}
+                  <div className="grid gap-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Field
+                      name="password"
+                      as={Input}
+                      type="password"
+                      placeholder="Your password"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="p"
+                      className="text-sm text-red-500"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter className="flex-col gap-2">
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? <Loader className="animate-spin" /> : "Login"}
+                </Button>
+              </CardFooter>
+            </Form>
+          </Formik>
+
+          <div className="mt-6 text-center text-sm text-gray-400">
+            Doesn't have an account?{" "}
+            <Link href="/register" className="text-red-500 hover:underline">
+              Register
+            </Link>
+          </div>
+        </motion.div>
+      </main>
+    </>
   );
 };
 

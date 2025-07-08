@@ -8,8 +8,11 @@ import { useEffect, useState } from "react";
 import { FaClipboardList, FaFire } from "react-icons/fa";
 import { GiHellCrosses } from "react-icons/gi";
 import { MdEmojiPeople, MdWork } from "react-icons/md";
+import { Button } from "./ui/button";
+import { useAuthStore } from "@/stores/auth";
 
 const Navbar = () => {
+  const { user, clearAuth } = useAuthStore(); // TODO: CEK KEABSAHAN
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [atPageBottom, setAtPageBottom] = useState(false);
@@ -38,7 +41,10 @@ const Navbar = () => {
     { href: "/about", label: "About Us", icon: GiHellCrosses },
     { href: "/products", label: "Products", icon: MdWork },
     { href: "/teams", label: "Teams", icon: MdEmojiPeople },
-    { href: "/blog", label: "Blog List", icon: FaClipboardList },
+    { href: "/blogs-list", label: "Blog List", icon: FaClipboardList },
+    // { href: "/write", label: "create blog", icon: FaClipboardList },
+    // { href: "/login", label: "login", icon: FaClipboardList },
+    // { href: "/", label: "login", icon: FaClipboardList },
   ];
 
   return (
@@ -85,13 +91,37 @@ const Navbar = () => {
                   </Link>
                 </motion.li>
               ))}
-              <button
+              {user ? (
+                <>
+                  <Button className="flex gap-2 rounded-md text-sm items-center bg-white text-black px-2 cursor-pointer p-1">
+                    <Link href="/write">Create Blog</Link>
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    onClick={clearAuth}
+                    className="flex gap-2 rounded-md text-sm items-center bg-red-700 text-black px-2 cursor-pointer p-1"
+                  >
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button className="flex gap-2 rounded-md text-sm items-center bg-white text-black px-2 cursor-pointer p-1">
+                    <Link href="/login">Login</Link>
+                  </Button>
+                  <Button className="flex gap-2 rounded-md text-sm items-center bg-white text-black px-2 cursor-pointer p-1">
+                    <Link href="/register">Register</Link>
+                  </Button>
+                </>
+              )}
+
+              <Button
                 onClick={() => alert("THERE IS NO LIGHTMODE IN HELL")}
                 className="flex gap-2 rounded-md text-sm items-center bg-white text-black px-2 cursor-pointer p-1"
               >
                 <SunIcon className="h-3 w-3" />
                 LightMode
-              </button>
+              </Button>
             </ul>
           </div>
         </nav>
