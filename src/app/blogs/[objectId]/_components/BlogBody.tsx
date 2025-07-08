@@ -10,7 +10,7 @@ const BlogBody: FC<BlogBodyProps> = async ({ objectId }) => {
   const blog = await getBlog(objectId);
 
   return (
-    <section className="mt-8">
+    <section className="text-justify flex flex-col w-[60%] prose prose-invert prose-red max-w-none mt-8 leading-relaxed">
       <Markdown content={blog.content} />
     </section>
   );

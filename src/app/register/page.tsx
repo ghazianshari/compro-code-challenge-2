@@ -50,7 +50,7 @@ const RegisterPage = () => {
   const { mutateAsync: register, isPending } = useRegister();
 
   return (
-    <main className="container mx-auto bg-black h-screen text-white flex items-center justify-center px-6 py-24">
+    <main className="container h-screen min-w-screen mx-auto bg-black text-white flex items-center justify-center px-6 py-24">
       <motion.div
         className="w-full max-w-md bg-zinc-900 border border-red-600 rounded-2xl p-8 shadow-2xl"
         initial={{ opacity: 0, y: 30 }}

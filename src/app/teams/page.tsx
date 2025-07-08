@@ -82,7 +82,7 @@ const TeamsPage = () => {
         {/* Team Grid */}
         <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
           {team.map((member, index) => {
-            const user = users[index]; // 🔥 match one user to one team member
+            const user = users[index]; // match one user to one team member
 
             return (
               <motion.div
