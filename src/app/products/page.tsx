@@ -9,43 +9,86 @@ const products = [
     id: "soul-extract-vial",
     name: "Soul Extract Vial",
     price: "66.6",
-    image: "/helAssets/products/soul_vial.png",
+    image: "/helAssets/SampleProducts.png",
     description: "A vial containing... something. Guaranteed to whisper back.",
   },
   {
     id: "void-cloak",
     name: "Void Cloak",
     price: "999.0",
-    image: "/helAssets/products/void_cloak.png",
+    image: "/helAssets/SampleProducts.png",
     description: "Wrap yourself in anti-light. Feels like forgetting.",
   },
   {
     id: "eldritch-charm",
     name: "Eldritch Charm",
     price: "333.3",
-    image: "/helAssets/products/eldritch_charm.png",
+    image: "/helAssets/SampleProducts.png",
     description: "Boosts luck, or curses your enemies. Possibly both.",
   },
   {
     id: "infernal-blade",
     name: "Infernal Blade",
     price: "1,000.0",
-    image: "/helAssets/products/infernal_blade.png",
+    image: "/helAssets/SampleProducts.png",
     description: "Forged in hate. Banned in 17 dimensions.",
   },
   {
-    id: "infernal-blade",
-    name: "Infernal Blade",
-    price: "1,000.0",
-    image: "/helAssets/products/infernal_blade.png",
-    description: "Forged in hate. Banned in 17 dimensions.",
+    id: "human-soul",
+    name: "Human Soul",
+    price: "9,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Once full of dreams and regret. Now available for purchase.",
   },
   {
-    id: "infernal-blade",
-    name: "Infernal Blade",
+    id: "essence-of-wrath",
+    name: "Essence of Wrath",
     price: "1,000.0",
-    image: "/helAssets/products/infernal_blade.png",
-    description: "Forged in hate. Banned in 17 dimensions.",
+    image: "/helAssets/SampleProducts.png",
+    description: "Boils endlessly. Handle with rage-resistant gloves.",
+  },
+  {
+    id: "essence-of-gluttony",
+    name: "Essence of Gluttony",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Hungers for more. Even when you're full, it isn't.",
+  },
+  {
+    id: "essence-of-sloth",
+    name: "Essence of Sloth",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description:
+      "Heavy, slow, and impossible to motivate. Just like you wanted.",
+  },
+  {
+    id: "essence-of-greed",
+    name: "Essence of Greed",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Whispers promises of more. Never enough, never satisfied.",
+  },
+  {
+    id: "essence-of-lust",
+    name: "Essence of Lust",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Seductive and dangerous. Be careful what you crave.",
+  },
+  {
+    id: "essence-of-envy",
+    name: "Essence of Envy",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Wants everything that isn’t yours. Especially happiness.",
+  },
+  {
+    id: "essence-of-pride",
+    name: "Essence of Pride",
+    price: "1,000.0",
+    image: "/helAssets/SampleProducts.png",
+    description: "Thinks it's better than the rest. Arrogance sold separately.",
   },
 ];
 
@@ -66,7 +109,11 @@ const ProductsPage = () => {
         </p>
       </motion.section>
 
-      <section className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+      {/* PRODUCT CARDS */}
+      <section
+        className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto"
+        style={{ zoom: 0.8 }}
+      >
         {products.map((product, index) => (
           <motion.div
             key={product.id}
@@ -82,7 +129,7 @@ const ProductsPage = () => {
                 alt={product.name}
                 width={500}
                 height={300}
-                className="rounded-lg object-contain border border-red-500 mb-4"
+                className="w-full h-auto rounded-lg object-contain border border-red-500 mb-4"
               />
               <h2 className="text-2xl font-bold text-red-400">
                 {product.name}

@@ -44,7 +44,7 @@ const AboutPage = () => {
           alt="Origin"
           width={600}
           height={400}
-          className="rounded-xl shadow-lg border border-red-800"
+          className="w-full h-auto rounded-xl shadow-lg border border-red-800"
         />
       </motion.section>
 
@@ -61,7 +61,7 @@ const AboutPage = () => {
           alt="Culture"
           width={600}
           height={400}
-          className="rounded-xl shadow-lg border border-red-800"
+          className="w-full h-auto rounded-xl shadow-lg border border-red-800"
         />
         <div>
           <h2 className="text-3xl font-bold text-red-400 mb-4">
